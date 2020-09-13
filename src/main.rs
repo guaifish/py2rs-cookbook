@@ -1,5 +1,10 @@
+use std::collections::VecDeque;
+
 fn main() {
-    let record = ("Dave", "dave@example.com", "773-555-1212", "847-555-1212");
-    // 好像无法匹配多个变量
-    // let (name, email, ..phone_numbers) = record;
+    let mut q = VecDeque::with_capacity(3);
+    q.push_back(1);
+    q.push_back(2);
+    q.push_back(3);
+    q.push_front(4);
+    assert_eq!(q, VecDeque::from(vec![4, 1, 2, 3])); // 没有定长
 }
