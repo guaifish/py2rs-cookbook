@@ -1,7 +1,12 @@
+use counter::Counter;
+
 fn main() {
-    let items = [0, 1, 2, 3, 4, 5, 6];
-    let a = 2..4;
-    assert_eq!(a.start, 2);
-    assert_eq!(a.end, 4);
-    println!("{:?}", &items[a]);
+    let words = [
+        "look", "into", "my", "eyes", "look", "into", "my", "eyes", "the", "eyes", "the", "eyes",
+        "the", "eyes", "not", "around", "the", "eyes", "don't", "look", "around", "the", "eyes",
+        "look", "into", "my", "eyes", "you're", "under",
+    ];
+    let word_counts: Counter<_> = words.iter().collect();
+    let top_three = &word_counts.most_common()[..3];
+    println!("{:?}", top_three);
 }
