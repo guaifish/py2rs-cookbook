@@ -1,26 +1,24 @@
-#[macro_use]
-extern crate maplit;
+use std::collections::HashSet;
 
 fn main() {
-    let a = hashset! {1, 2, 3};
-    let b = hashset! {4, 2, 3};
+    let a = [1, 5, 2, 1, 9, 1, 5, 10];
+    let mut set = HashSet::new();
+    for i in a.iter() {
+        set.insert(i);
+    }
+    println!("{:?}", set);
+    let a = dedupe(&a);
+    println!("{:?}", a);
+}
 
-    println!("{:?}", a.union(&b));
-    println!("{:?}", a.difference(&b));
-    println!("{:?}", a.intersection(&b));
-
-    let a = hashmap! {
-        'x' => 1,
-        'y' => 2,
-        'z' => 3,
-    };
-    let b = hashmap! {
-        'w' => 10,
-        'x' => 11,
-        'y' => 2,
-    };
-    // HashMap 无法交并差集合操作
-    println!("{:?}", a.union(&b));
-    println!("{:?}", a.difference(&b));
-    println!("{:?}", a.intersection(&b));
+fn dedupe(items: &[i32]) -> Vec<i32> {
+    let mut seen = HashSet::new();
+    let mut v = Vec::new();
+    for item in items {
+        if !seen.contains(item) {
+            seen.insert(*item);
+            v.push(*item);
+        }
+    }
+    v
 }
