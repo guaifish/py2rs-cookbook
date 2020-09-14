@@ -1,9 +1,12 @@
+#[macro_use]
+extern crate maplit;
+use chain_map::ChainMap;
+
 fn main() {
-    let nums = [1, 2, 3, 4, 5];
-    let sum = nums.iter().map(|x| x * x).fold(0, |a, b| a + b);
-    assert_eq!(sum, 55);
-    let min = *nums.iter().min().unwrap();
-    assert_eq!(min, 1);
-    let max = *nums.iter().max().unwrap();
-    assert_eq!(max, 5);
+    let a = hashmap! { 'x' => 1, 'z' => 3 };
+    let b = hashmap! { 'y' => 2, 'z' => 4 };
+    let mergegd: ChainMap<_, _> = vec![a, b].into_iter().collect();
+    assert_eq!(mergegd[&'x'], 1);
+    assert_eq!(mergegd[&'y'], 2);
+    assert_eq!(mergegd[&'z'], 3);
 }
