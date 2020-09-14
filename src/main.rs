@@ -1,16 +1,9 @@
-struct Subscriber<'a> {
-    addr: &'a str,
-    joined: &'a str,
-}
-
-impl<'a> Subscriber<'a> {
-    fn new(addr: &'a str, joined: &'a str) -> Subscriber<'a> {
-        Subscriber { addr, joined }
-    }
-}
-
 fn main() {
-    let sub = Subscriber::new("jonesy@example.com", "2012-10-19");
-    println!("{:?}", sub.addr);
-    println!("{:?}", sub.joined);
+    let nums = [1, 2, 3, 4, 5];
+    let sum = nums.iter().map(|x| x * x).fold(0, |a, b| a + b);
+    assert_eq!(sum, 55);
+    let min = *nums.iter().min().unwrap();
+    assert_eq!(min, 1);
+    let max = *nums.iter().max().unwrap();
+    assert_eq!(max, 5);
 }
