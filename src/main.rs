@@ -1,26 +1,35 @@
-fn main() {
-    let mylist = [1, 4, -5, 10, -7, 2, 3, -1];
-    let positive_list: Vec<_> = mylist.iter().filter(|n| **n > 0).collect();
-    println!("{:?}", positive_list);
-    let negative_list: Vec<_> = mylist.iter().filter(|n| **n < 0).collect();
-    println!("{:?}", negative_list);
+#[macro_use]
+extern crate maplit;
 
-    let addresses = [
-        "5412 N CLARK",
-        "5148 N CLARK",
-        "5800 E 58TH",
-        "2122 N CLARK",
-        "5645 N RAVENSWOOD",
-        "1060 W ADDISON",
-        "4801 N BROADWAY",
-        "1039 W GRANVILLE",
-    ];
-    let counts = [0, 3, 10, 4, 1, 7, 6, 1];
-    let a: Vec<_> = addresses
+#[macro_use(c)]
+extern crate cute;
+
+use std::collections::HashMap;
+
+fn main() {
+    let prices = hashmap! {
+        "ACME" => 45.23,
+        "AAPL" => 612.78,
+        "IBM" => 205.55,
+        "HPQ" => 37.20,
+        "FB" => 10.75,
+    };
+    
+    // py
+    let p1 = c! {k => v, for (k, v) in &prices, if *v > 200.0};
+    println!("{:?}", p1);
+    // rs
+    let p1: HashMap<_, _> = prices.iter().filter(|(_, v)| **v > 200.0).collect();
+    println!("{:?}", p1);
+
+    // py
+    let tech_names = hashset! {"AAPL", "IBM", "HPQ", "MSFT"};
+    let p2 = c! {k => v, for (k, v) in &prices, if tech_names.contains(k)};
+    println!("{:?}", p2);
+    // rs
+    let p2: HashMap<_, _> = prices
         .iter()
-        .zip(counts.iter())
-        .filter(|x| *x.1 > 5)
-        .map(|x| x.0)
+        .filter(|(k, _)| tech_names.contains(**k))
         .collect();
-    println!("{:?}", a);
+    println!("{:?}", p2);
 }
