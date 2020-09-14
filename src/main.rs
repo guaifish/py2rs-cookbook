@@ -1,12 +1,19 @@
-use counter::Counter;
+#[macro_use]
+extern crate maplit;
 
 fn main() {
-    let words = [
-        "look", "into", "my", "eyes", "look", "into", "my", "eyes", "the", "eyes", "the", "eyes",
-        "the", "eyes", "not", "around", "the", "eyes", "don't", "look", "around", "the", "eyes",
-        "look", "into", "my", "eyes", "you're", "under",
+    let mut rows = [
+        hashmap! {"fname" => "Brian", "lname" => "Jones", "uid" => "1003"},
+        hashmap! {"fname" => "David", "lname" => "Beazley", "uid" => "1002"},
+        hashmap! {"fname" => "John", "lname" => "Cleese", "uid" => "1001"},
+        hashmap! {"fname" => "Big", "lname" => "Jones", "uid" => "1004"},
     ];
-    let word_counts: Counter<_> = words.iter().collect();
-    let top_three = &word_counts.most_common()[..3];
-    println!("{:?}", top_three);
+    rows.sort_by(|a, b| {
+        let a: i32 = a["uid"].parse().unwrap();
+        let b: i32 = b["uid"].parse().unwrap();
+        a.cmp(&b)
+    });
+    for r in rows.iter() {
+        println!("{:?}", r);
+    }
 }
