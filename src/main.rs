@@ -2,23 +2,25 @@
 extern crate maplit;
 
 fn main() {
-    let prices = hashmap! {
-        "ACME" => 45.23,
-        "AAPL" => 612.78,
-        "IBM" => 205.55,
-        "HPQ" => 37.20,
-        "FB" => 10.75,
-    };
-    // note: 浮点数数组最大值, f64 没有实现 Ord
-    let max_prices_and_names = prices
-        .iter()
-        .max_by(|a, b| a.1.partial_cmp(b.1).unwrap())
-        .unwrap();
-    println!("{:?}", max_prices_and_names);
+    let a = hashset! {1, 2, 3};
+    let b = hashset! {4, 2, 3};
 
-    let min_prices_and_names = prices
-        .iter()
-        .min_by(|a, b| a.1.partial_cmp(b.1).unwrap())
-        .unwrap();
-    println!("{:?}", min_prices_and_names);
+    println!("{:?}", a.union(&b));
+    println!("{:?}", a.difference(&b));
+    println!("{:?}", a.intersection(&b));
+
+    let a = hashmap! {
+        'x' => 1,
+        'y' => 2,
+        'z' => 3,
+    };
+    let b = hashmap! {
+        'w' => 10,
+        'x' => 11,
+        'y' => 2,
+    };
+    // HashMap 无法交并差集合操作
+    println!("{:?}", a.union(&b));
+    println!("{:?}", a.difference(&b));
+    println!("{:?}", a.intersection(&b));
 }
