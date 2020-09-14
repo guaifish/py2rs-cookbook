@@ -1,13 +1,22 @@
-use py2rs_cookbook::PriorityQueue;
+#[macro_use] extern crate maplit;
+use defaultmap::DefaultHashMap;
+use std::collections::HashSet;
+
 
 fn main() {
-    let mut q = PriorityQueue::new();
-    q.push("foo", 1);
-    q.push("bar", 5);
-    q.push("spam", 4);
-    q.push("grok", 1);
-    assert_eq!(q.pop(), "bar");
-    assert_eq!(q.pop(), "spam");
-    assert_eq!(q.pop(), "foo");
-    assert_eq!(q.pop(), "grok");
+    let mut m = DefaultHashMap::new(vec![]);
+    m['a'].push(1);
+    m['a'].push(2);
+    m['b'].push(4);
+    assert_eq!(m['a'], vec![1, 2]);
+    assert_eq!(m['b'], vec![4]);
+    assert_eq!(m['c'], vec![]);
+
+    let mut m = DefaultHashMap::new(HashSet::new());
+    m['a'].insert(1);
+    m['a'].insert(2);
+    m['b'].insert(4);
+    assert_eq!(m['a'], hashset!{1, 2});
+    assert_eq!(m['b'], hashset!{4});
+    assert_eq!(m['c'], HashSet::new());
 }
