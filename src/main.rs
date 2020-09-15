@@ -1,11 +1,14 @@
 use regex::Regex;
 
 fn main() {
-    let re = Regex::new(r"(\d+)/(\d+)/(\d+)").unwrap();
-    assert!(re.is_match(r"11/27/2012"));
-    let caps = re.captures(r"11/27/2012").unwrap();
-    assert_eq!(caps.get(1).unwrap().as_str(), "11");
-    assert_eq!(caps.get(2).unwrap().as_str(), "27");
-    assert_eq!(caps.get(3).unwrap().as_str(), "2012");
-    assert_eq!(caps.get(0).unwrap().as_str(), "11/27/2012");
+    let text = r"yeah, but no, but yeah, but no, but yeah";
+    assert_eq!(
+        text.replace("yeah", "yep"),
+        r"yep, but no, but yep, but no, but yep"
+    );
+
+    let text = r"Today is 11/27/2012. PyCon starts 3/13/2013.";
+    let re = Regex::new(r"(?P<month>\d+)/(?P<day>\d+)/(?P<year>\d+)").unwrap();
+    let result = re.replace_all(text, r"$year-$month-$day");
+    assert_eq!(result, r"Today is 2012-11-27. PyCon starts 2013-3-13.");
 }
