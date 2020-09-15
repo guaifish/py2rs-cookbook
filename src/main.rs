@@ -1,16 +1,9 @@
-#[macro_use]
-extern crate decimal;
-
 fn main() {
-    let a = 4.2;
-    let b = 2.1;
-    assert!(equal(a + b, 6.3));
-
-    let a = d128!(4.2);
-    let b = d128!(2.1);
-    assert_eq!(a + b, d128!(6.3));
-}
-
-fn equal(a: f64, b: f64) -> bool {
-    a - b < 0.1_f64.powi(10)
+    let x = 1234.56789;
+    assert_eq!(format!("{:.2}", x), "1234.57");
+    assert_eq!(format!("{:>10.1}", x), "    1234.6");
+    assert_eq!(format!("{:<10.1}", x), "1234.6    ");
+    assert_eq!(format!("{:^10.1}", x), "  1234.6  ");
+    assert_eq!(format!("{:.1e}", x), "1.2e3");
+    assert_eq!(format!("{:.1E}", x), "1.2E3");
 }
