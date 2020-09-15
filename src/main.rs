@@ -1,16 +1,17 @@
 fn main() {
-    let x = 1234;
-    let bin = "10011010010";
-    let oct = "2322";
-    let hex = "4d2";
-    assert_eq!(format!("{:b}", x), bin);
-    assert_eq!(format!("{:#b}", x), "0b".to_owned() + bin);
-    assert_eq!(format!("{:o}", x), oct);
-    assert_eq!(format!("{:#o}", x), "0o".to_owned() + oct);
-    assert_eq!(format!("{:x}", x), hex);
-    assert_eq!(format!("{:#x}", x), "0x".to_owned() + hex);
+    assert_ne!(0.0_f64 / 0.0_f64, 0.0_f64 / 0.0_f64);
+    assert_ne!(f64::NAN, f64::NAN);
+    assert_eq!(1.0_f64 / 0.0_f64, f64::INFINITY);
+    assert_eq!(-1.0_f64 / 0.0_f64, f64::NEG_INFINITY);
 
-    assert_eq!(i32::from_str_radix(bin, 2).unwrap(), x);
-    assert_eq!(i32::from_str_radix(oct, 8).unwrap(), x);
-    assert_eq!(i32::from_str_radix(hex, 16).unwrap(), x);
+    assert_eq!(f64::INFINITY + 45.0, f64::INFINITY);
+    assert_eq!(f64::INFINITY * 10.0, f64::INFINITY);
+    assert_eq!(10.0 / f64::INFINITY, 0.0);
+
+    assert_eq!(format!("{:?}", f64::INFINITY / f64::INFINITY), "NaN");
+    assert_eq!(format!("{:?}", f64::INFINITY / f64::NEG_INFINITY), "NaN");
+    assert_eq!(format!("{:?}", f64::NAN + 23.0), "NaN");
+    assert_eq!(format!("{:?}", f64::NAN / 2.0), "NaN");
+    assert_eq!(format!("{:?}", f64::NAN * 2.0), "NaN");
+    assert_eq!(format!("{:?}", f64::NAN.sqrt()), "NaN");
 }
