@@ -1,13 +1,16 @@
+#[macro_use]
+extern crate decimal;
+
 fn main() {
-    assert_eq!(round(1.23, 1), 1.2);
-    assert_eq!(round(1.27, 1), 1.3);
-    assert_eq!(round(1.25361, 3), 1.254);
-    assert_eq!(round(1627731.0, -1), 1627730.0);
-    assert_eq!(round(1627731.0, -2), 1627700.0);
-    assert_eq!(round(1627731.0, -3), 1628000.0);
+    let a = 4.2;
+    let b = 2.1;
+    assert!(equal(a + b, 6.3));
+
+    let a = d128!(4.2);
+    let b = d128!(2.1);
+    assert_eq!(a + b, d128!(6.3));
 }
 
-fn round(value: f64, ndigits: i32) -> f64 {
-    let x = 10.0_f64.powi(ndigits);
-    (value * x).round() / x
+fn equal(a: f64, b: f64) -> bool {
+    a - b < 0.1_f64.powi(10)
 }
