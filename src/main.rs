@@ -1,9 +1,16 @@
 fn main() {
-    let x = 1234.56789;
-    assert_eq!(format!("{:.2}", x), "1234.57");
-    assert_eq!(format!("{:>10.1}", x), "    1234.6");
-    assert_eq!(format!("{:<10.1}", x), "1234.6    ");
-    assert_eq!(format!("{:^10.1}", x), "  1234.6  ");
-    assert_eq!(format!("{:.1e}", x), "1.2e3");
-    assert_eq!(format!("{:.1E}", x), "1.2E3");
+    let x = 1234;
+    let bin = "10011010010";
+    let oct = "2322";
+    let hex = "4d2";
+    assert_eq!(format!("{:b}", x), bin);
+    assert_eq!(format!("{:#b}", x), "0b".to_owned() + bin);
+    assert_eq!(format!("{:o}", x), oct);
+    assert_eq!(format!("{:#o}", x), "0o".to_owned() + oct);
+    assert_eq!(format!("{:x}", x), hex);
+    assert_eq!(format!("{:#x}", x), "0x".to_owned() + hex);
+
+    assert_eq!(i32::from_str_radix(bin, 2).unwrap(), x);
+    assert_eq!(i32::from_str_radix(oct, 8).unwrap(), x);
+    assert_eq!(i32::from_str_radix(hex, 16).unwrap(), x);
 }
