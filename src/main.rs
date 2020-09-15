@@ -1,8 +1,13 @@
 fn main() {
-    let data = b"Hello World";
-    assert_eq!(&data[0..5], b"Hello");
-    assert_eq!(String::from_utf8_lossy(&data[0..5]), "Hello");
-    let mut iter = data.split(|x| *x == b' ');
-    assert_eq!(iter.next().unwrap(), b"Hello");
-    assert_eq!(iter.next().unwrap(), b"World");
+    assert_eq!(round(1.23, 1), 1.2);
+    assert_eq!(round(1.27, 1), 1.3);
+    assert_eq!(round(1.25361, 3), 1.254);
+    assert_eq!(round(1627731.0, -1), 1627730.0);
+    assert_eq!(round(1627731.0, -2), 1627700.0);
+    assert_eq!(round(1627731.0, -3), 1628000.0);
+}
+
+fn round(value: f64, ndigits: i32) -> f64 {
+    let x = 10.0_f64.powi(ndigits);
+    (value * x).round() / x
 }
