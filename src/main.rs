@@ -1,15 +1,8 @@
-use textwrap::{NoHyphenation, Wrapper};
+use htmlescape::{decode_html, encode_minimal};
 
 fn main() {
-    let s = "Look into my eyes, look into my eyes, the eyes, the eyes, \
-            the eyes, not around the eyes, don't look around the eyes, \
-            look into my eyes, you're under.";
-
-    println!("{}", textwrap::fill(s, 70));
-    println!("\n");
-
-    let wrapper = Wrapper::with_splitter(40, NoHyphenation)
-        .initial_indent("    ")
-        .subsequent_indent("");
-    println!("{}", wrapper.fill(s));
+    let s1 = r#"Elements are written as "<tag>text</tag>"."#;
+    let s2 = "Elements are written as &quot;&lt;tag&gt;text&lt;/tag&gt;&quot;.";
+    assert_eq!(encode_minimal(s1), s2);
+    assert_eq!(s1, decode_html(s2).unwrap());
 }
