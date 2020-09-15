@@ -1,9 +1,7 @@
-use regex::Regex;
-
 fn main() {
-    let line = "asdf fjdk; afed, fjek,asdf, foo";
+    let filename = "spam.txt";
+    assert_eq!(filename.ends_with(".txt"), true);
 
-    let re = Regex::new(r"[;,\s]\s*").unwrap();
-    let fields: Vec<_> = re.split(line).collect();
-    assert_eq!(fields, ["asdf", "fjdk", "afed", "fjek", "asdf", "foo"]);
+    let url = "http://www.python.org";
+    assert_eq!(url.starts_with("http:"), true);
 }
