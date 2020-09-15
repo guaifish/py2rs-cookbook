@@ -1,13 +1,12 @@
-use regex::Regex;
-
 fn main() {
-    let re = Regex::new(r"(?s)/\*(.*?)\*/").unwrap();
-    let text2 = r#"/* this is a
-    multiline comment */
-    "#;
-    let result = re.captures(text2).unwrap();
-    assert_eq!(
-        result.get(1).unwrap().as_str(),
-        " this is a\n    multiline comment "
-    );
+    let s = " hello world \n";
+    assert_eq!(s.trim(), "hello world");
+    assert_eq!(s.trim_start(), "hello world \n");
+    assert_eq!(s.trim_end(), " hello world");
+
+    let t = "-----hello=====";
+    assert_eq!(t.trim_start_matches('-'), "hello=====");
+    assert_eq!(t.trim_end_matches('='), "-----hello");
+    let pat: &[_] = &['-', '='];
+    assert_eq!(t.trim_matches(pat), "hello");
 }
