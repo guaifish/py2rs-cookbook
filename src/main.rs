@@ -1,11 +1,10 @@
 fn main() {
-    let text = "Hello World";
-    let x = 1.2345;
-    println!("{:<20}", text);
-    println!("{:>20}", text);
-    println!("{:^20}", text);
-    println!("{:=>20}", text);
-    println!("{:*^20}", text);
-    println!("{:>10}", x);
-    println!("{:.2}", x);
+    let parts = ["Is", "Chicago", "Not", "Chicago?"];
+    assert_eq!(parts.join(" "), "Is Chicago Not Chicago?");
+    assert_eq!(parts.join(","), "Is,Chicago,Not,Chicago?");
+    assert_eq!(parts.join(""), "IsChicagoNotChicago?");
+
+    let a = "Is Chicago";
+    let b = "Not Chicago?";
+    assert_eq!(a.to_owned() + " " + b, "Is Chicago Not Chicago?");
 }
